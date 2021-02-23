@@ -7,26 +7,61 @@
 
 import Foundation
 
-struct MemoryGame<CardContent> {
+//MODEL
+struct MemoryGame<CardContent> where CardContent: Equatable {
     
     var cards: Array<Card>
     
-    mutating func choose(card: Card) {
+    var indexOfTheOneAndOnlyFacedUpCard: Int? {
         
-        let chosenIndex: Int = self.index(of: card)
-        self.cards[chosenIndex].isFaceUp = !self.cards[chosenIndex].isFaceUp
+        //pega somente o índice do card que que está com faceUp
+        get {
+            cards.indices.filter { cards[$0].isFaceUp }.only
+        }
         
-        print("card chosen: \(card)")
-    }
-    
-    func index(of card: Card) -> Int {
-        for index in 0..<self.cards.count {
-            if self.cards[index].id == card.id {
-                return index
+        //compara os índices dos cards com o valor passado para indexOfTheOneAndOnlyFacedUpCard
+        //quando índice e novo valor são iguais retorna true para o faceUp do card correspondente
+        set {
+            for index in cards.indices {
+                cards[index].isFaceUp = index == newValue
             }
         }
-        return 0 // TODO: bogus
     }
+    
+    mutating func choose(card: Card) {
+        
+        if let
+            
+            chosenIndex: Int = cards.firstIndex(matching: card),
+            !cards[chosenIndex].isFaceUp,
+            !cards[chosenIndex].isMatched {
+            
+            if let potentialMatchIndex = indexOfTheOneAndOnlyFacedUpCard {
+                
+                if cards[chosenIndex].content == cards[potentialMatchIndex].content {
+                    cards[chosenIndex].isMatched = true
+                    cards[potentialMatchIndex].isMatched = true
+                }
+                
+                self.cards[chosenIndex].isFaceUp = true
+                
+            }else{
+                
+                indexOfTheOneAndOnlyFacedUpCard = chosenIndex
+                
+            }
+
+        }
+    }
+    
+    //    func index(of card: Card) -> Int {
+    //        for index in 0..<self.cards.count {
+    //            if self.cards[index].id == card.id {
+    //                return index
+    //            }
+    //        }
+    //        return 0 // TODO: bogus
+    //    }
     
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
         cards = Array<Card>()
@@ -38,7 +73,7 @@ struct MemoryGame<CardContent> {
     }
     
     struct Card: Identifiable {
-        var isFaceUp: Bool = true
+        var isFaceUp: Bool = false
         var isMatched: Bool = false
         var content: CardContent
         var id: Int
