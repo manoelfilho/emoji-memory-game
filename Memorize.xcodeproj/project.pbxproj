@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BB1C470C25E5E73A00788EA1 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C470B25E5E73A00788EA1 /* Pie.swift */; };
+		BB1C470F25E5FA2C00788EA1 /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C470E25E5FA2C00788EA1 /* Cardify.swift */; };
 		BB46FDB025E34D5000488C65 /* Array+Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB46FDAF25E34D5000488C65 /* Array+Only.swift */; };
 		BB4B042825DEE9B4000B71B3 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4B042725DEE9B4000B71B3 /* Grid.swift */; };
 		BB4B042B25DEFE06000B71B3 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4B042A25DEFE06000B71B3 /* GridLayout.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		BB1C470B25E5E73A00788EA1 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
+		BB1C470E25E5FA2C00788EA1 /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 		BB46FDAF25E34D5000488C65 /* Array+Only.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Only.swift"; sourceTree = "<group>"; };
 		BB4B042725DEE9B4000B71B3 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		BB4B042A25DEFE06000B71B3 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				BBF2130E25DAF356006A7D96 /* MemorizeApp.swift */,
 				BBF2132325DC236E006A7D96 /* MemoryGame.swift */,
 				BB1C470B25E5E73A00788EA1 /* Pie.swift */,
+				BB1C470E25E5FA2C00788EA1 /* Cardify.swift */,
 				BB4B042A25DEFE06000B71B3 /* GridLayout.swift */,
 				BB46FDAF25E34D5000488C65 /* Array+Only.swift */,
 				BB4B042D25DF2A8C000B71B3 /* Array+Identifiable.swift */,
@@ -173,6 +176,7 @@
 				BB4B042825DEE9B4000B71B3 /* Grid.swift in Sources */,
 				BB4B042E25DF2A8C000B71B3 /* Array+Identifiable.swift in Sources */,
 				BBCE0C7125DC26A300F6721E /* EmojiMemoryGame.swift in Sources */,
+				BB1C470F25E5FA2C00788EA1 /* Cardify.swift in Sources */,
 				BB46FDB025E34D5000488C65 /* Array+Only.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
