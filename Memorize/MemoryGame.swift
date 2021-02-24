@@ -10,9 +10,9 @@ import Foundation
 //MODEL
 struct MemoryGame<CardContent> where CardContent: Equatable {
     
-    var cards: Array<Card>
+    private(set) var cards: Array<Card>
     
-    var indexOfTheOneAndOnlyFacedUpCard: Int? {
+    private var indexOfTheOneAndOnlyFacedUpCard: Int? {
         
         //pega somente o índice do card que que está com faceUp
         get {

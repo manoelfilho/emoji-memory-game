@@ -29,9 +29,9 @@ struct EmojiMemoryGameView: View {
 struct CardView: View {
     
     //MARK: - Drawing constants
-    let cornerRadius: CGFloat = 10.0
-    let edgeLineWidth: CGFloat = 1 //edge -> borda
-    let fontScaleFactor: CGFloat = 0.75
+    private let cornerRadius: CGFloat = 10.0
+    private let edgeLineWidth: CGFloat = 1 //edge -> borda
+    private let fontScaleFactor: CGFloat = 0.75
     
     func fontSize(for size:CGSize) -> CGFloat {
         min(size.width, size.height) * self.fontScaleFactor
