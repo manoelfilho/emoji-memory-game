@@ -50,6 +50,12 @@ struct CardView: View {
             if card.isFaceUp {
                 RoundedRectangle(cornerRadius: self.cornerRadius).fill(Color.green)
                 RoundedRectangle(cornerRadius: self.cornerRadius).stroke(lineWidth: self.edgeLineWidth)
+                
+                //Circle().fill(Color.gray.opacity(Double.init(0.8))).padding(2)
+                Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(110-90), clockwise: true)
+                    .fill(Color.gray.opacity(Double.init(0.8)))
+                    .padding(2)
+                
                 Text(card.content)
             }else{
                 if !card.isMatched {
