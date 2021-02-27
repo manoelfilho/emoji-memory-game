@@ -10,26 +10,39 @@ import SwiftUI
 //VIEW MODEL
 class EmojiMemoryGame: ObservableObject {
     
-    // Published informa ao sistema do app sempre que houver mudancas no model
+    @Published private var model: MemoryGame<String>?
     
-    @Published private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
+    var emojiGroup: EmojiGroup?
     
-    static private func createMemoryGame() -> MemoryGame<String> {
-        let emojis: Array<String> = ["👻", "🎃", "💀", "🕷", "🕸", "🧟‍♀️", "🤠", "🙅🏿"]
-        return MemoryGame<String>(numberOfPairsOfCards: 8) { (pairIndex) -> String in
-            return emojis[pairIndex]
+    init(with group: EmojiGroup) {
+
+        self.emojiGroup = group
+        self.createMemoryGame()
+    }
+    
+    func createMemoryGame(){
+        self.model = MemoryGame<String>(numberOfPairsOfCards: 14) { (pairIndex) -> String in
+            if let emojis = self.emojiGroup {
+                return emojis.emojis[pairIndex]
+            }else{
+                return ""
+            }
         }
     }
         
     //MARK: - Access to the model
     var cards: Array<MemoryGame<String>.Card>{
-        return model.cards
+        return model!.cards
     }
     
     
     //MARK: - Intent(s)
     func choose(card: MemoryGame<String>.Card){
-        model.choose(card: card)
+        model!.choose(card: card)
+    }
+    
+    func resetGame(){
+        self.createMemoryGame()
     }
     
 }
