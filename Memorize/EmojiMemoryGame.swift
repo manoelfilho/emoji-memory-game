@@ -21,7 +21,7 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     func createMemoryGame(){
-        self.model = MemoryGame<String>(numberOfPairsOfCards: 14) { (pairIndex) -> String in
+        self.model = MemoryGame<String>(numberOfPairsOfCards: 15) { (pairIndex) -> String in
             if let emojis = self.emojiGroup {
                 return emojis.emojis[pairIndex]
             }else{
@@ -35,6 +35,9 @@ class EmojiMemoryGame: ObservableObject {
         return model!.cards
     }
     
+    var score: Int{
+        return model!.scoreGame
+    }
     
     //MARK: - Intent(s)
     func choose(card: MemoryGame<String>.Card){

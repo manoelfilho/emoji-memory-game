@@ -12,6 +12,8 @@ struct EmojiMemoryGameView: View {
     
     //sempre que ocorrer uma mudanca em ObservedObject viewModel ocorrer um redraw da view
     @ObservedObject var viewModel: EmojiMemoryGame
+    @State var scoreGame: Int = 0
+    @State var timeRemaining: Int = 0
     
     var body: some View {
         VStack{
@@ -26,6 +28,13 @@ struct EmojiMemoryGameView: View {
                 
                 Spacer()
                 
+                Image(systemName: "bitcoinsign.circle")
+                    .font(.title)
+                Text(String(viewModel.score))
+                
+                
+                Spacer()
+                
                 Button(
                     action: {
                         withAnimation(.easeInOut){
@@ -33,15 +42,15 @@ struct EmojiMemoryGameView: View {
                         }
                     },
                     label: {
-                        Text("Novo jogo")
-                            .foregroundColor(.white)
+                        Image(systemName: "arrow.clockwise.circle.fill")
+                            .foregroundColor(.red)
+                            .font(.title)
                     }
                 )
-                    .padding()
-                    .background(Color.green)
-                    .cornerRadius(8)
             }
             .padding(6)
+            
+            Spacer()
             
             Grid(items: viewModel.cards) { card in
                 CardView(card: card)
@@ -62,7 +71,7 @@ struct EmojiMemoryGameView: View {
 struct CardView: View {
     
     //MARK: - Drawing constants
-    private let fontScaleFactor: CGFloat = 0.75
+    private let fontScaleFactor: CGFloat = 0.5
     
     func fontSize(for size:CGSize) -> CGFloat {
         min(size.width, size.height) * self.fontScaleFactor
@@ -89,29 +98,42 @@ struct CardView: View {
     func body(for size: CGSize) -> some View {
         
         if card.isFaceUp || !card.isMatched {
-            ZStack {
-                Group{
-                    if card.isConsumingBonusTime{
-                        Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-animatedBonusRemaining*360-90), clockwise: true)
-                            .fill(Color.gray.opacity(Double.init(0.8)))
-                            .onAppear{
-                                self.startBonusTimeAnimation()
-                            }
-                    }else{
-                        Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-animatedBonusRemaining*360-90), clockwise: true)
-                            .fill(Color.gray.opacity(Double.init(0.8)))
+            
+            VStack{
+                
+                ZStack {
+                    
+                    Group{
+                        if card.isConsumingBonusTime{
+                            Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-animatedBonusRemaining*360-90), clockwise: true)
+                                .fill(Color.gray.opacity(Double.init(0.8)))
+                                .onAppear{
+                                    self.startBonusTimeAnimation()
+                                }
+                        }else{
+                            Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-animatedBonusRemaining*360-90), clockwise: true)
+                                .fill(Color.gray.opacity(Double.init(0.8)))
+                        }
                     }
+                    .padding(2)
+                    
+                    Text(card.content)
+                        .font(Font.system(size: fontSize(for: size)))
+                        .rotationEffect(Angle.degrees(card.isMatched ? 360:0))
+                        .animation(Animation.linear(duration: 1))
+                    
                 }
-                .padding(2)
                 
-                Text(card.content)
-                    .font(Font.system(size: fontSize(for: size)))
-                    .rotationEffect(Angle.degrees(card.isMatched ? 360:0))
-                    .animation(Animation.linear(duration: 1))
-                
+                if card.hasBonus {
+                    Text("Bonus!")
+                        .foregroundColor(.green)
+                        .fontWeight(.bold)
+                        .font(.footnote)
+                }
             }
             .cardify(isFaceUp: card.isFaceUp)
             .transition(AnyTransition.scale) //só ocorre quando algo surge ou sai da tela
+            
         }
     }
     
