@@ -64,7 +64,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                         
                 }else{
                     
-                    self.scoreGame -= 2
+                    self.scoreGame -= 1
                 
                 }
                 
